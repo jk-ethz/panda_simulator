@@ -39,7 +39,7 @@
 
 
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find franka_panda_description)/robots/panda_arm_hand.urdf.xacro load_gripper:=$(arg load_gripper) load_gazebo:=$(arg load_gazebo)" unless="$(arg load_camera_mount)"/>
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find realsense_lab_config)/robots/panda_arm_hand_camera_mount_sim.urdf.xacro load_gripper:=$(arg load_gripper) load_gazebo:=$(arg load_gazebo)" if="$(arg load_camera_mount)"/>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find realsense_lab_config)/robots/panda_arm_hand_camera_mount.urdf.xacro load_gripper:=$(arg load_gripper) load_gazebo:=$(arg load_gazebo)" if="$(arg load_camera_mount)"/>
 
 
   <param name="/arm/root_name" value="panda_link0" />
@@ -85,6 +85,7 @@
     <group if="$(eval arg('start_moveit') == true)">
       <include file="$(find panda_sim_moveit)/launch/sim_move_group.launch">
         <arg name="load_gripper" value="$(arg load_gripper)" />
+        <arg name="load_camera_mount" value="$(arg load_camera_mount)" />
         <arg name="info" value="true" />
       </include>
     </group>
